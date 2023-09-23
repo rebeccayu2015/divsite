@@ -1,8 +1,11 @@
-{% load static %}
-{% load widget_tweaks %}
-
-{% block title %}
-<title>Sign Up</title>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Chef Mike's Sub Shop</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="" />
+  <link rel="icon" href="favicon.png">
     <style>
         *{
             margin: 0;
@@ -186,11 +189,8 @@
         }
     </style>
     <script src="https://kit.fontawesome.com/cd0702460b.js" crossorigin="anonymous"></script>
-{% endblock %}
-
-{% load crispy_forms_tags %}
-
-{% block content %}
+</head>
+<body>
 <div id="header">
     <div class="container">
       <nav>
@@ -216,16 +216,6 @@
     </div>
 </div>
 
-
-<div class="signup-container">
-  <h1 id="signup-title">Sign Up</h1>
-  <form class="needs-validation" name="login" action="" method="POST" enctype="multipart/form-data" novalidate>
-    {% csrf_token %}
-    {{ form|crispy }}
-    <button class="btn btn-primary" type="submit">Register</button>
-    <p id="login-bottom">Have an account? <a href="/login">Login</a>.</p>
-  </form>
-</div>
-
-<script src={% static 'js/show_password_sign_up.js' %}></script>
-{% endblock %}
+  <h1>Chef Mike's Sub Shop</h1>
+</body>
+</html>

@@ -1,0 +1,23 @@
+1695502117499	geckodriver	INFO	Listening on 127.0.0.1:58988
+1695502117897	mozrunner::runner	INFO	Running command: MOZ_CRASHREPORTER="1" MOZ_CRASHREPORTER_NO_REPORT="1" MOZ_CRASHREPORTER_SHUTDOWN="1" MOZ_NO_REMOTE="1" "/App ... s" "localhost" "-foreground" "-no-remote" "-profile" "/var/folders/9d/2jhh_ptx6v5cg_s6q21gprmw0000gn/T/rust_mozprofileXTCp1j"
+WebDriver BiDi listening on ws://127.0.0.1:58989
+UNSUPPORTED (log once): POSSIBLE ISSUE: unit 1 GLD_TEXTURE_INDEX_2D is unloadable and bound to sampler type (Float) - using zero texture because texture unloadable
+DevTools listening on ws://127.0.0.1:58989/devtools/browser/304746d2-31f7-46ee-97f9-eee977009f38
+1695502160702	geckodriver	INFO	Listening on 127.0.0.1:59064
+1695502161227	mozrunner::runner	INFO	Running command: MOZ_CRASHREPORTER="1" MOZ_CRASHREPORTER_NO_REPORT="1" MOZ_CRASHREPORTER_SHUTDOWN="1" MOZ_NO_REMOTE="1" "/Use ... s" "localhost" "-foreground" "-no-remote" "-profile" "/var/folders/9d/2jhh_ptx6v5cg_s6q21gprmw0000gn/T/rust_mozprofilehv9K6M"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1695502177985	Marionette	INFO	Marionette enabled
+console.error: "Warning: unrecognized command line flag" "-remote-allow-hosts"
+1695502178336	Marionette	INFO	Listening on port 59150
+WebDriver BiDi listening on ws://127.0.0.1:59065
+Read port: 59150
+1695502178646	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+DevTools listening on ws://127.0.0.1:59065/devtools/browser/0de70475-9b4a-4500-817a-59658dc3c6e6
+JavaScript error: https://dining.columbia.edu/sites/default/files/js/js_bS3tJr8F6R06_7lBTT-AFwY3GQpOqxdfPjlzD-GpByQ.js, line 4369: TypeError: drupalSettings.events is undefined
+JavaScript error: , line 0: NotFoundError: No such JSWindowActor 'DevToolsFrame'
+JavaScript warning: https://www.googletagmanager.com/gtag/js?id=G-B8JR0BWLMK&l=dataLayer&cx=c, line 153: Script terminated by timeout at:
+l@https://www.googletagmanager.com/gtag/js?id=G-B8JR0BWLMK&l=dataLayer&cx=c:153:17
+Fz@https://www.googletagmanager.com/gtag/js?id=G-B8JR0BWLMK&l=dataLayer&cx=c:459:134
+Gz/<@https://www.googletagmanager.com/gtag/js?id=G-B8JR0BWLMK&l=dataLayer&cx=c:459:111
+

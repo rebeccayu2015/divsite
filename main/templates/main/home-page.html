@@ -1,17 +1,326 @@
-{% extends "base.html" %}
 {% load static %}
 {% load widget_tweaks %}
 
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title></title>
-    <link rel="stylesheet" href="style.css">
-  </head>
-  <body>
-	<script src="index.js"></script>
-  </body>
-</html>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            font-family: 'Monaco', sans-serif;
+            box-sizing: border-box;
+        }
+        body{
+            background: #374955;
+            color: #fff;
+        }
+        #header{
+            width: 100%;
+            height: 150px;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        .container{
+            padding: 15px 8%;
+        }
+
+        .container img{
+            width: 65px;
+        }
+
+        nav{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .logo{
+            width: 140px;
+        }
+
+        nav ul li{
+            display: inline-block;
+            list-style: none;
+            margin: 20px 20px;
+        }
+
+        nav ul li a{
+            color: #fff;
+            text-decoration: none;
+            font-size: 18px;
+            position: relative;
+        }
+
+        nav ul li a::after{
+            content: '';
+            width: 0;
+            height: 3px;
+            background: #9bcbeb;
+            position: absolute;
+            left: 0;
+            bottom: -6px;
+            transition: 0.5s;
+        }
+
+        nav ul li a:hover::after{
+            width: 100%;
+        }
+
+        .title h1{
+            font-size: 50px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            color: #fff;
+            text-shadow: #101010 1px 0 10px;
+            text-align: center;
+        }
+
+        /* -----------star item------------ */
+        #star-item{
+            color: #fff;
+            height: 140px;
+        }
+
+        .star-item-text{
+            margin-top: 10px;
+            text-align: center;
+        }
+        .star-item-text h3{
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #E5B8D4;
+        }
+
+        p{
+            text-align: center;
+        }
+
+        table.best-item{
+            width: 100%;
+            text-align: center;
+            border: solid;
+            border-color: #9bcbeb;
+            border-width: 2px;
+            border-radius: 13px;
+        }
+        table.best-item th{
+            padding: 0%;
+            font-size: 18px;
+            background: #7b8b96;
+        }
+        table.best-item td{
+            padding: 0%;
+            font-size: 16px;
+        }
+
+        /* -----------leaderboard------------ */
+        #leaderboard{
+            color: #fff;
+            height: 320px;
+        }
+        .row{
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .leaderboard-col-1{
+            flex-basis: 48%;
+        }
+
+        .leaderboard-col-2{
+            flex-basis: 48%;
+        }
+
+        .leaderboard-text{
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        .leaderboard-text h3{
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #E5B8D4;
+        }
+
+        table.leaderboard-table{
+            width: 100%;
+            text-align: center;
+            border: solid;
+            border-color: #9bcbeb;
+            border-width: 2px;
+            border-radius: 15px;
+        }
+        table.leaderboard-table th{
+            padding: 6px;
+            border-top: 2px solid #9bcbeb;
+            font-size: 18px;
+            background: #7b8b96;
+        }
+        table.leaderboard-table td{
+            padding: 6px;
+            border-top: 2px solid #9bcbeb;
+            font-size: 16px;
+        }
+
+        /* -----------dining halls------------ */
+        .dining-halls-text{
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        .dining-halls-text h3{
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #E5B8D4;
+        }
+
+        p{
+            text-align: center;
+            font-size: 18px;
+        }
+        p a{
+            color: #fff;
+        }
+    </style>
+    <script src="https://kit.fontawesome.com/cd0702460b.js" crossorigin="anonymous"></script>
+</head>
+<body>
+<div id="header">
+    <div class="container">
+      <nav>
+        {% if user.is_authenticated %}
+            <img src="/media/images/columbia.png" class="logo">
+            <ul>
+                <li><a href="{% url 'home_page' %}">Home</a></li>
+                <li><a href="{% url 'logout' %}">Logout</a></li>
+            </ul>
+        {% else %}
+            <img src="/media/images/columbia.png" class="logo">
+            <ul>
+                <li><a href="{% url 'home_page' %}">Home</a></li>
+                <li><a href="{% url 'sign_up' %}">Sign Up</a></li>
+                <li><a href="{% url 'login' %}">Log In</a></li>
+            </ul>
+        {% endif %}
+      </nav>
+        <div class="title">
+            <h1>Columbia Dining Dashboard</h1>
+        </div>
+        
+    </div>
+</div>
+
+
+<!-- ----------Star Item----------- -->
+<div id="star-item">
+    <div class="container">
+        <div class="star-item-text">
+            <h3>Best Rated Item</h3>
+        </div>
+        <div>
+            <table class="best-item">
+                <tr>
+                  <th>Dining Hall</th>
+                  <th>Item</th>
+                  <th>Score</th>
+                  <th>Wait Time</th>
+                </tr>
+                <tr>
+                    <td>Ferris</td>
+                    <td>Poke Bowl</td>
+                    <td>+12</td>
+                    <td>15 minutes</td>
+                  </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- ----------leaderboard----------- -->
+<div id="leaderboard">
+    <div class="container">
+        <div class="leaderboard-text">
+            <h3>Leaderboard</h3>
+        </div>
+        <div class="row">
+            <div class="leaderboard-col-1">
+                <table class="leaderboard-table">
+                    <tr>
+                      <th>Dining Hall</th>
+                      <th>Highest Rated Food</th>
+                    </tr>
+                    <tc>
+                      <td>John Jay</td>
+                      <td>Burrito</td>
+                    </tr>
+                    <tr>
+                      <td>Ferris</td>
+                      <td>Poke Bowl</td>
+                    </tr>
+                    <tr>
+                        <td>JJ's Place</td>
+                        <td>BBQ Chicken Quesadilla</td>
+                    </tr>
+                    <tr>
+                        <td>Faculty House</td>
+                        <td>Grilled Salmon</td>
+                    </tr>
+                    <tr>
+                        <td>Diana</td>
+                        <td>Burrito Bowl</td>
+                    </tr>
+                  </table>
+            </div>
+            <div class="leaderboard-col-2">
+                <table class="leaderboard-table">
+                    <tr>
+                      <th>Dining Hall</th>
+                      <th>Wait Time</th>
+                    </tr>
+                    <tc>
+                      <td>John Jay</td>
+                      <td>15 minutes</td>
+                    </tr>
+                    <tr>
+                        <td>Ferris</td>
+                        <td>20 minutes</td>
+                    </tr>
+                    <tr>
+                        <td>JJ's Place</td>
+                        <td>10 minutes</td>
+                    </tr>
+                    <tr>
+                        <td>Faculty House</td>
+                        <td>5 minutes</td>
+                    </tr>
+                    <tr>
+                        <td>Diana</td>
+                        <td>8 minutes</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ----------Dining Halls----------- -->
+<div id="dining-halls">
+    <div class="container">
+        <div class="dining-halls-text">
+            <h3>Live Dining Hall Reviews</h3>
+        </div>
+        <div class="dining-hall-list">
+            <p><a href="{% url 'faculty_house' %}">Faculty House</a><br>
+                <a href="{% url 'ferris_booth' %}">Ferris Booth Commons</a><br>
+                <a href="{% url 'jj_place' %}">JJ's Place</a><br>
+                <a href="{% url 'mike_sub' %}">Chef Mike's Sub Shop</a><br>
+            </p>
+        </div>
+    </div>
+</div>

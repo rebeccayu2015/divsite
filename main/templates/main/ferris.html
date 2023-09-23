@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ferris Dining Hall</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            font-family: 'Monaco', sans-serif;
+            box-sizing: border-box;
+        }
+        body{
+            background: #374955;
+            color: #fff;
+        }
+        #header{
+            width: 100%;
+            height: 150px;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        .container{
+            padding: 15px 8%;
+        }
+
+        .container img{
+            width: 65px;
+        }
+
+        nav{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .logo{
+            width: 140px;
+        }
+
+        nav ul li{
+            display: inline-block;
+            list-style: none;
+            margin: 20px 20px;
+        }
+
+        nav ul li a{
+            color: #fff;
+            text-decoration: none;
+            font-size: 18px;
+            position: relative;
+        }
+
+        nav ul li a::after{
+            content: '';
+            width: 0;
+            height: 3px;
+            background: #9bcbeb;
+            position: absolute;
+            left: 0;
+            bottom: -6px;
+            transition: 0.5s;
+        }
+
+        nav ul li a:hover::after{
+            width: 100%;
+        }
+
+        .title h1{
+            font-size: 50px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            color: #fff;
+            text-shadow: #101010 1px 0 10px;
+            text-align: center;
+        }
+
+        /* -----------Food Rankings------------ */
+        #food-rankings{
+            color: #fff;
+            height: 140px;
+        }
+
+        .food-list h3{
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #E5B8D4;
+            margin-top: 10px;
+            text-align: center;
+        }
+        table.food-item{
+            width: 100%;
+            text-align: center;
+            border: solid;
+            border-color: #9bcbeb;
+            border-width: 2px;
+            border-radius: 13px;
+            background: #7b8b96;
+        }
+        table.food-item th{
+            font-size: 20px;
+            background: #7b8b96;
+        }
+        table.food-item th.icons{
+            padding-top: 10px;
+            font-size: 30px;
+        }
+        table.food-item th.food-name{
+            font-size: 30px;
+        }
+        table.food-item td{
+            font-size: 16px;
+            padding-bottom: 15px;
+        }
+        table.food-item td.dropdown select{
+            font-size: 14px;
+            background: #7b8b96;
+            border-width: 1.5px;
+            border-color: #fff;
+            border-radius: 8px;
+            text-align: center;
+            color: #fff;
+        }
+        table.food-item td.score{
+            font-size: 22px;
+        }
+
+        /* -----------leaderboard------------ */
+        #leaderboard{
+            color: #fff;
+            height: 320px;
+        }
+        .row{
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .leaderboard-col-1{
+            flex-basis: 48%;
+        }
+
+        .leaderboard-col-2{
+            flex-basis: 48%;
+        }
+
+        .leaderboard-text{
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        .leaderboard-text h3{
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #E5B8D4;
+        }
+
+        table.leaderboard-table{
+            width: 100%;
+            text-align: center;
+            border: solid;
+            border-color: #9bcbeb;
+            border-width: 2px;
+            border-radius: 15px;
+        }
+        table.leaderboard-table th{
+            padding: 6px;
+            border-top: 2px solid #9bcbeb;
+            font-size: 18px;
+            background: #7b8b96;
+        }
+        table.leaderboard-table td{
+            padding: 6px;
+            border-top: 2px solid #9bcbeb;
+            font-size: 16px;
+        }
+
+        /* -----------dining halls------------ */
+        .dining-halls-text{
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        .dining-halls-text h3{
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #E5B8D4;
+        }
+
+        p{
+            text-align: center;
+            font-size: 18px;
+        }
+        p a{
+            color: #fff;
+        }
+    </style>
+    <script src="https://kit.fontawesome.com/cd0702460b.js" crossorigin="anonymous"></script>
+</head>
+<body>
+<div id="header">
+    <div class="container">
+        <nav>
+            <img src="images/columbia.png" class="logo">
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Sign Up</a></li>
+                <li><a href="#">Log In</a></li>
+            </ul>
+        </nav>
+        <div class="title">
+            <h1>Ferris Dining Hall</h1>
+        </div>
+        
+    </div>
+</div>
+
+<!-- ----------Food Rankings----------- -->
+<div id="food-rankings">
+    <div class="container">
+        <div class="food-list">
+            <h3>Food Rankings</h3>
+            <table class="food-item">
+                <tr>
+                    <th class="icons" width="5%"><i class="fa-regular fa-thumbs-up"></i></i></th>
+                    <th class="icons" width="5%"><i class="fa-regular fa-thumbs-down"></i></i></th>
+                    <th rowspan="2" width="30%" class="food-name">Rebecca's Hot Sauce</th>
+                    <th>Wait Time: 8 minutes</th>
+                </tr>
+                <tr>
+                    <td class="score" colspan="2">+8</td>
+                    <td width="20%" class="dropdown"><label for="wait-times">Submit Wait Time: </label> 
+                        <select name="time-ranges" id="wait-time"> 
+                            <option value=''>Please select</option>
+                            <option value=5>0 min - 9 min</option> 
+                            <option value=15>10 min - 19 min</option> 
+                            <option value=25>20 min - 29 min</option> 
+                            <option value=35>30+ min</option> 
+                        </select>
+                        <button type="button">submit</button>
+                    </td>
+                </tr>
+            </table>
+            <br>
+            <table class="food-item">
+                <tr>
+                    <th class="icons" width="5%"><i class="fa-regular fa-thumbs-up"></i></i></th>
+                    <th class="icons" width="5%"><i class="fa-regular fa-thumbs-down"></i></i></th>
+                    <th rowspan="2" width="30%" class="food-name">Rebecca's Hot Cheetos</th>
+                    <th>Wait Time: 8 minutes</th>
+                </tr>
+                <tr>
+                    <td class="score" colspan="2">+7</td>
+                    <td width="20%" class="dropdown"><label for="wait-times">Submit Wait Time: </label> 
+                        <select name="time-ranges" id="wait-time"> 
+                            <option value=''>Please select</option>
+                            <option value=5>0 min - 9 min</option> 
+                            <option value=15>10 min - 19 min</option> 
+                            <option value=25>20 min - 29 min</option> 
+                            <option value=35>30+ min</option> 
+                        </select>
+                        <button type="button">submit</button>
+                    </td>
+                </tr>
+            </table>
+            <br>
+            <table class="food-item">
+                <tr>
+                    <th class="icons" width="5%"><i class="fa-regular fa-thumbs-up"></i></i></th>
+                    <th class="icons" width="5%"><i class="fa-regular fa-thumbs-down"></i></i></th>
+                    <th rowspan="2" width="30%" class="food-name">Rebecca's Chicken Wings</th>
+                    <th>Wait Time: 8 minutes</th>
+                </tr>
+                <tr>
+                    <td class="score" colspan="2">+2</td>
+                    <td width="20%" class="dropdown"><label for="wait-times">Submit Wait Time: </label> 
+                        <select name="time-ranges" id="wait-time"> 
+                            <option value=''>Please select</option>
+                            <option value=5>0 min - 9 min</option> 
+                            <option value=15>10 min - 19 min</option> 
+                            <option value=25>20 min - 29 min</option> 
+                            <option value=35>30+ min</option> 
+                        </select>
+                        <button type="button">submit</button>
+                    </td>
+                </tr>
+            </table>
+            <br>
+            <table class="food-item">
+                <tr>
+                    <th class="icons" width="5%"><i class="fa-regular fa-thumbs-up"></i></i></th>
+                    <th class="icons" width="5%"><i class="fa-regular fa-thumbs-down"></i></i></th>
+                    <th rowspan="2" width="30%" class="food-name">Rebecca's Dole Whip</th>
+                    <th>Wait Time: 2 minutes</th>
+                </tr>
+                <tr>
+                    <td class="score" colspan="2">-100</td>
+                    <td width="20%" class="dropdown"><label for="wait-times">Submit Wait Time: </label> 
+                        <select name="time-ranges" id="wait-time"> 
+                            <option value=''>Please select</option>
+                            <option value=5>0 min - 9 min</option> 
+                            <option value=15>10 min - 19 min</option> 
+                            <option value=25>20 min - 29 min</option> 
+                            <option value=35>30+ min</option> 
+                        </select>
+                        <button type="button">submit</button>
+                    </td>
+                </tr>
+            </table>
+            <br>
+            <table class="food-item">
+                <tr>
+                    <th class="icons" width="5%"><i class="fa-regular fa-thumbs-up"></i></i></th>
+                    <th class="icons" width="5%"><i class="fa-regular fa-thumbs-down"></i></i></th>
+                    <th rowspan="2" width="30%" class="food-name">Rebecca's Sus Red Drink</th>
+                    <th>Wait Time: 0 minutes</th>
+                </tr>
+                <tr>
+                    <td class="score" colspan="2">-120</td>
+                    <td width="20%" class="dropdown"><label for="wait-times">Submit Wait Time: </label> 
+                        <select name="time-ranges" id="wait-time"> 
+                            <option value=''>Please select</option>
+                            <option value=5>0 min - 9 min</option> 
+                            <option value=15>10 min - 19 min</option> 
+                            <option value=25>20 min - 29 min</option> 
+                            <option value=35>30+ min</option> 
+                        </select>
+                        <button type="button">submit</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

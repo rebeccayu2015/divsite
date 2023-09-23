@@ -1,14 +1,221 @@
-{% extends "base.html" %}
 {% load static %}
 {% load widget_tweaks %}
 
 {% block title %}
 <title>Login</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            font-family: 'Monaco', sans-serif;
+            box-sizing: border-box;
+        }
+        body{
+            background: #374955;
+            color: #fff;
+        }
+        #header{
+            width: 100%;
+            height: 150px;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        .container{
+            padding: 15px 8%;
+        }
+
+        .container img{
+            width: 65px;
+        }
+
+        nav{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .logo{
+            width: 140px;
+        }
+
+        nav ul li{
+            display: inline-block;
+            list-style: none;
+            margin: 20px 20px;
+        }
+
+        nav ul li a{
+            color: #fff;
+            text-decoration: none;
+            font-size: 18px;
+            position: relative;
+        }
+
+        nav ul li a::after{
+            content: '';
+            width: 0;
+            height: 3px;
+            background: #9bcbeb;
+            position: absolute;
+            left: 0;
+            bottom: -6px;
+            transition: 0.5s;
+        }
+
+        nav ul li a:hover::after{
+            width: 100%;
+        }
+
+        .title h1{
+            font-size: 50px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            color: #fff;
+            text-shadow: #101010 1px 0 10px;
+            text-align: center;
+        }
+
+        /* -----------star item------------ */
+        #star-item{
+            color: #fff;
+            height: 140px;
+        }
+
+        .star-item-text{
+            margin-top: 10px;
+            text-align: center;
+        }
+        .star-item-text h3{
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #E5B8D4;
+        }
+
+        p{
+            text-align: center;
+        }
+
+        table.best-item{
+            width: 100%;
+            text-align: center;
+            border: solid;
+            border-color: #9bcbeb;
+            border-width: 2px;
+            border-radius: 13px;
+        }
+        table.best-item th{
+            padding: 0%;
+            font-size: 18px;
+            background: #7b8b96;
+        }
+        table.best-item td{
+            padding: 0%;
+            font-size: 16px;
+        }
+
+        /* -----------leaderboard------------ */
+        #leaderboard{
+            color: #fff;
+            height: 320px;
+        }
+        .row{
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .leaderboard-col-1{
+            flex-basis: 48%;
+        }
+
+        .leaderboard-col-2{
+            flex-basis: 48%;
+        }
+
+        .leaderboard-text{
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        .leaderboard-text h3{
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #E5B8D4;
+        }
+
+        table.leaderboard-table{
+            width: 100%;
+            text-align: center;
+            border: solid;
+            border-color: #9bcbeb;
+            border-width: 2px;
+            border-radius: 15px;
+        }
+        table.leaderboard-table th{
+            padding: 6px;
+            border-top: 2px solid #9bcbeb;
+            font-size: 18px;
+            background: #7b8b96;
+        }
+        table.leaderboard-table td{
+            padding: 6px;
+            border-top: 2px solid #9bcbeb;
+            font-size: 16px;
+        }
+
+        /* -----------dining halls------------ */
+        .dining-halls-text{
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        .dining-halls-text h3{
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #E5B8D4;
+        }
+
+        p{
+            text-align: center;
+            font-size: 18px;
+        }
+        p a{
+            color: #fff;
+        }
+    </style>
+    <script src="https://kit.fontawesome.com/cd0702460b.js" crossorigin="anonymous"></script>
 {% endblock %}
 
 {% load crispy_forms_tags %}
 
 {% block content %}
+<div id="header">
+    <div class="container">
+      <nav>
+        {% if user.is_authenticated %}
+            <img src="/media/images/columbia.png" class="logo">
+            <ul>
+                <li><a href="{% url 'home_page' %}">Home</a></li>
+                <li><a href="{% url 'logout' %}">Logout</a></li>
+            </ul>
+        {% else %}
+            <img src="/media/images/columbia.png" class="logo">
+            <ul>
+                <li><a href="{% url 'home_page' %}">Home</a></li>
+                <li><a href="{% url 'sign_up' %}">Sign Up</a></li>
+                <li><a href="{% url 'login' %}">Log In</a></li>
+            </ul>
+        {% endif %}
+      </nav>
+        <div class="title">
+            <h1>Columbia Dining Dashboard</h1>
+        </div>
+        
+    </div>
+</div>
+
 <div class="login-container">
   {% if "next" in request.get_full_path %}
     <div class="alert alert-warning alert-dismissible" role="alert">
