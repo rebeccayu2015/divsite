@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block title %}
+<title>Sign Up</title>
+{% endblock %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="signup-container">
+  <h1 id="signup-title">Sign Up</h1>
+  <form class="needs-validation" name="login" action="" method="POST" enctype="multipart/form-data" novalidate>
+    {% csrf_token %}
+    {{ form|crispy }}
+    <button class="btn btn-primary" type="submit">Register</button>
+    <p id="login-bottom">Have an account? <a href="/login">Login</a>.</p>
+  </form>
+</div>
+
+<script src={% static 'js/show_password_sign_up.js' %}></script>
+{% endblock %}
