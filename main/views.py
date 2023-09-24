@@ -28,7 +28,7 @@ def scrape_dining():
                 "div", {"class": "meal-item angular-animate ng-trans ng-trans-fade-down"}))
             oatmeal = soup.find_all("h5", {"class": "meal-title"})
             for oat in oatmeal:
-                inventory[f'{oat.text}'] = [0, 0, [], []]
+                inventory[f'{oat.text}'] = [0, 0, [], [], []]
         master[name] = inventory
         driver.close()
 
@@ -40,7 +40,7 @@ def scrape_dining():
             items = json.dumps(str(master[i]))
             items = items.replace('\\', '')
             if items == "\"{}\"":
-                items = "\"{'': [0, 0, [], []]}\""
+                items = "\"{'': [0, 0, [], [], []]}\""
             file.write(items)
             file.close()
         j += 1
@@ -153,6 +153,8 @@ def home(request):
 @login_required(login_url='/login/')
 def faculty_house(request):
     items = read_file('media/files/faculty.txt')
+    can_time = True
+    can_vote = True
 
     if request.method == "POST":
         if 'item' in request.POST:
@@ -160,27 +162,36 @@ def faculty_house(request):
             value_split = value.split("_")
             item = value_split[0]
             reaction = value_split[1]
+            if (request.user.id not in items[item][3]):
 
-            if reaction == "like":
-                items[item][0] += 1
+                if reaction == "like":
+                    items[item][0] += 1
+                else:
+                    items[item][0] -= 1
+
+                items[item][3].append(request.user.id)
+
+                write_file('media/files/faculty.txt', items)
             else:
-                items[item][0] -= 1
+                can_vote = False
 
-            items[item][3].append(request.user.id)
-
-            write_file('media/files/faculty.txt', items)
         if 'time-ranges' in request.POST:
             time_range = request.POST.get('time-ranges')
             time_range_split = time_range.split("_")
             item = time_range_split[0]
             time_range = int(time_range_split[1])
 
-            if time_range != 0:
-                items[item][2].append(time_range)
-                avg_time = mean(items[item][2])
-                items[item][1] = round(avg_time, 2)
+            if (request.user.id not in items[item][4]):
+                if time_range != 0:
+                    items[item][2].append(time_range)
+                    avg_time = mean(items[item][2])
+                    items[item][1] = round(avg_time, 2)
 
-                write_file('media/files/faculty.txt', items)
+                    items[item][4].append(request.user.id)
+
+                    write_file('media/files/faculty.txt', items)
+            else:
+                can_time = False
 
     items = dict(sorted(items.items(), key=lambda x: x[1], reverse=True))
 
@@ -191,6 +202,8 @@ def faculty_house(request):
     context = {
         'item_info': items,
         'user': user,
+        'can_time': can_time,
+        'can_vote': can_vote
     }
 
     return render(request, 'main/faculty.html', context)
@@ -198,6 +211,8 @@ def faculty_house(request):
 @login_required(login_url='/login/')
 def ferris_booth(request):
     items = read_file('media/files/ferris.txt')
+    can_time = True
+    can_vote = True
 
     if request.method == "POST":
         if 'item' in request.POST:
@@ -205,27 +220,36 @@ def ferris_booth(request):
             value_split = value.split("_")
             item = value_split[0]
             reaction = value_split[1]
+            if (request.user.id not in items[item][3]):
 
-            if reaction == "like":
-                items[item][0] += 1
+                if reaction == "like":
+                    items[item][0] += 1
+                else:
+                    items[item][0] -= 1
+
+                items[item][3].append(request.user.id)
+
+                write_file('media/files/ferris.txt', items)
             else:
-                items[item][0] -= 1
+                can_vote = False
 
-            items[item][3].append(request.user.id)
-
-            write_file('media/files/ferris.txt', items)
         if 'time-ranges' in request.POST:
             time_range = request.POST.get('time-ranges')
             time_range_split = time_range.split("_")
             item = time_range_split[0]
             time_range = int(time_range_split[1])
 
-            if time_range != 0:
-                items[item][2].append(time_range)
-                avg_time = mean(items[item][2])
-                items[item][1] = round(avg_time, 2)
+            if (request.user.id not in items[item][4]):
+                if time_range != 0:
+                    items[item][2].append(time_range)
+                    avg_time = mean(items[item][2])
+                    items[item][1] = round(avg_time, 2)
 
-                write_file('media/files/ferris.txt', items)
+                    items[item][4].append(request.user.id)
+
+                    write_file('media/files/ferris.txt', items)
+            else:
+                can_time = False
 
     items = dict(sorted(items.items(), key=lambda x: x[1], reverse=True))
 
@@ -236,6 +260,8 @@ def ferris_booth(request):
     context = {
         'item_info': items,
         'user': user,
+        'can_time': can_time,
+        'can_vote': can_vote
     }
 
     return render(request, 'main/ferris.html', context)
@@ -243,6 +269,8 @@ def ferris_booth(request):
 @login_required(login_url='/login/')
 def jj_place(request):
     items = read_file('media/files/jj.txt')
+    can_time = True
+    can_vote = True
 
     if request.method == "POST":
         if 'item' in request.POST:
@@ -250,27 +278,36 @@ def jj_place(request):
             value_split = value.split("_")
             item = value_split[0]
             reaction = value_split[1]
+            if (request.user.id not in items[item][3]):
 
-            if reaction == "like":
-                items[item][0] += 1
+                if reaction == "like":
+                    items[item][0] += 1
+                else:
+                    items[item][0] -= 1
+
+                items[item][3].append(request.user.id)
+
+                write_file('media/files/jj.txt', items)
             else:
-                items[item][0] -= 1
+                can_vote = False
 
-            items[item][3].append(request.user.id)
-
-            write_file('media/files/jj.txt', items)
         if 'time-ranges' in request.POST:
             time_range = request.POST.get('time-ranges')
             time_range_split = time_range.split("_")
             item = time_range_split[0]
             time_range = int(time_range_split[1])
+            
+            if (request.user.id not in items[item][4]):
+                if time_range != 0:
+                    items[item][2].append(time_range)
+                    avg_time = mean(items[item][2])
+                    items[item][1] = round(avg_time, 2)
 
-            if time_range != 0:
-                items[item][2].append(time_range)
-                avg_time = mean(items[item][2])
-                items[item][1] = round(avg_time, 2)
+                    items[item][4].append(request.user.id)
 
-                write_file('media/files/jj.txt', items)
+                    write_file('media/files/jj.txt', items)
+            else:
+                can_time = False
 
     items = dict(sorted(items.items(), key=lambda x: x[1], reverse=True))
 
@@ -281,6 +318,8 @@ def jj_place(request):
     context = {
         'item_info': items,
         'user': user,
+        'can_time': can_time,
+        'can_vote': can_vote
     }
 
     return render(request, 'main/jj.html', context)
@@ -288,6 +327,8 @@ def jj_place(request):
 @login_required(login_url='/login/')
 def mike_sub(request):
     items = read_file('media/files/mike.txt')
+    can_time = True
+    can_vote = True
 
     if request.method == "POST":
         if 'item' in request.POST:
@@ -295,27 +336,36 @@ def mike_sub(request):
             value_split = value.split("_")
             item = value_split[0]
             reaction = value_split[1]
+            if (request.user.id not in items[item][3]):
 
-            if reaction == "like":
-                items[item][0] += 1
+                if reaction == "like":
+                    items[item][0] += 1
+                else:
+                    items[item][0] -= 1
+
+                items[item][3].append(request.user.id)
+
+                write_file('media/files/mike.txt', items)
             else:
-                items[item][0] -= 1
+                can_vote = False
 
-            items[item][3].append(request.user.id)
-
-            write_file('media/files/mike.txt', items)
         if 'time-ranges' in request.POST:
             time_range = request.POST.get('time-ranges')
             time_range_split = time_range.split("_")
             item = time_range_split[0]
             time_range = int(time_range_split[1])
 
-            if time_range != 0:
-                items[item][2].append(time_range)
-                avg_time = mean(items[item][2])
-                items[item][1] = round(avg_time, 2)
+            if (request.user.id not in items[item][4]):
+                if time_range != 0:
+                    items[item][2].append(time_range)
+                    avg_time = mean(items[item][2])
+                    items[item][1] = round(avg_time, 2)
 
-                write_file('media/files/mike.txt', items)
+                    items[item][4].append(request.user.id)
+
+                    write_file('media/files/mike.txt', items)
+            else:
+                can_time = False
 
     items = dict(sorted(items.items(), key=lambda x: x[1], reverse=True))
 
@@ -326,6 +376,8 @@ def mike_sub(request):
     context = {
         'item_info': items,
         'user': user,
+        'can_time': can_time,
+        'can_vote': can_vote
     }
     return render(request, 'main/mike.html', context)
 

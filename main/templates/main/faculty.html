@@ -238,6 +238,14 @@
 <div id="food-rankings">
     <div class="container">
         <div class="food-list">
+            <div class="alert alert-warning alert-dismissible" role="alert">
+            {% if can_time == False %}
+                You have already submitted a wait time.
+            {% endif %}
+            {% if can_vote == False %}
+                You have already voted.
+            {% endif %}
+            </div>
             <h3>Food Rankings</h3>
             {% for key, value in item_info.items %}
                 <table class="food-item">
