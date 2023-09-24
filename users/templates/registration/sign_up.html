@@ -184,6 +184,49 @@
         p a{
             color: #fff;
         }
+
+        /* -----------sign up------------ */
+        .signup-container{
+            padding-top: 10px;
+            text-align: center;
+        }
+        .signup-container form{
+            text-align: center;
+            font-size: 22px;
+            padding-top: 30px;
+            padding-bottom: 10px;
+        }
+        .signup-container button{
+            margin-top: 15px;
+            font-size: 16px;   
+            padding-left: 6px; 
+            padding-right: 6px;
+            padding-top: 2px;
+            padding-bottom: 2px;
+            border-radius: 5px;
+            border-color: #fff;
+        }
+        .signup-container form p, .signup-container form a{
+            padding-top: 30px;
+            text-align: center;
+            color: #E5B8D4
+        }
+        .signup-container form div.mb-3{
+            padding-bottom: 12px;
+        }
+        .signup-container form #div_id_username #hint_id_username{
+            font-size: 14px;
+            font-style: italic;
+        }
+        .signup-container form #hint_id_password1 ul{
+            font-size: 14px;
+            font-style: italic;
+        }
+        .signup-container form #div_id_password2 #hint_id_password2{
+            font-size: 14px;
+            font-style: italic;
+        }
+
     </style>
     <script src="https://kit.fontawesome.com/cd0702460b.js" crossorigin="anonymous"></script>
 {% endblock %}
@@ -210,7 +253,7 @@
         {% endif %}
       </nav>
         <div class="title">
-            <h1>Columbia Dining Dashboard</h1>
+            <h1>Sign Up</h1>
         </div>
         
     </div>
@@ -218,11 +261,11 @@
 
 
 <div class="signup-container">
-  <h1 id="signup-title">Sign Up</h1>
   <form class="needs-validation" name="login" action="" method="POST" enctype="multipart/form-data" novalidate>
     {% csrf_token %}
     {{ form|crispy }}
     <button class="btn btn-primary" type="submit">Register</button>
+    <br>
     <p id="login-bottom">Have an account? <a href="/login">Login</a>.</p>
   </form>
 </div>
