@@ -1,11 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>JJ's Place</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="description" content="" />
-  <link rel="icon" href="favicon.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ferris Dining Hall</title>
     <style>
         *{
             margin: 0;
@@ -80,42 +78,54 @@
             text-align: center;
         }
 
-        /* -----------star item------------ */
-        #star-item{
+        /* -----------Food Rankings------------ */
+        #food-rankings{
             color: #fff;
             height: 140px;
         }
 
-        .star-item-text{
-            margin-top: 10px;
-            text-align: center;
-        }
-        .star-item-text h3{
+        .food-list h3{
             font-size: 24px;
             margin-bottom: 10px;
             color: #E5B8D4;
-        }
-
-        p{
+            margin-top: 10px;
             text-align: center;
         }
-
-        table.best-item{
+        table.food-item{
             width: 100%;
             text-align: center;
             border: solid;
             border-color: #9bcbeb;
             border-width: 2px;
             border-radius: 13px;
-        }
-        table.best-item th{
-            padding: 0%;
-            font-size: 18px;
             background: #7b8b96;
         }
-        table.best-item td{
-            padding: 0%;
+        table.food-item th{
+            font-size: 20px;
+            background: #7b8b96;
+        }
+        table.food-item th.icons{
+            padding-top: 10px;
+            font-size: 30px;
+        }
+        table.food-item th.food-name{
+            font-size: 30px;
+        }
+        table.food-item td{
             font-size: 16px;
+            padding-bottom: 15px;
+        }
+        table.food-item td.dropdown select{
+            font-size: 14px;
+            background: #7b8b96;
+            border-width: 1.5px;
+            border-color: #fff;
+            border-radius: 8px;
+            text-align: center;
+            color: #fff;
+        }
+        table.food-item td.score{
+            font-size: 22px;
         }
 
         /* -----------leaderboard------------ */
@@ -187,6 +197,14 @@
         p a{
             color: #fff;
         }
+
+        .fabutton {
+            background: none;
+            padding: 0px;
+            border: none;
+            font-size: 30px;
+            color: #fff;
+        }
     </style>
     <script src="https://kit.fontawesome.com/cd0702460b.js" crossorigin="anonymous"></script>
 </head>
@@ -210,12 +228,67 @@
         {% endif %}
       </nav>
         <div class="title">
-            <h1>Columbia Dining Dashboard</h1>
+            <h1>JJ's Place</h1>
         </div>
         
     </div>
 </div>
 
-  <h1>JJ's Place</h1>
-</body>
-</html>
+<!-- ----------Food Rankings----------- -->
+<div id="food-rankings">
+    <div class="container">
+        <div class="food-list">
+            <h3>Food Rankings</h3>
+            {{ temp }}
+            {% for key, value in item_info.items %}
+                <table class="food-item">
+                    <tr>
+                        <form action="" method="POST" style="display:inline">
+                            {% csrf_token %}
+                            <th class="icons" width="5%"><button type="submit" class="fabutton" name="item" value="{{ key }}_like"><i class="fa-regular fa-thumbs-up"></i></button></th>
+                        </form>
+                        <form action="" method="POST" style="display:inline">
+                            {% csrf_token %}
+                            <th class="icons" width="5%"><button type="submit" class="fabutton" name="item" value="{{ key }}_dislike""><i class="fa-regular fa-thumbs-down"></i></button></th>
+                        </form>
+                        <th rowspan="2" width="30%" class="food-name">{{ key }}</th>
+                        <th>Wait Time: 
+                            {% if value.1 == 0 %}
+                                N/A
+                            {% elif value.1 <= 1 %}
+                                0 min - 9 min
+                            {% elif value.1 <= 2 %}
+                                10 min - 19 min
+                            {% elif value.1 <= 3 %}
+                                20 min - 29 min
+                            {% else %}
+                                30+ min
+                            {% endif %}
+                        </th>
+                    </tr>
+                    <tr>
+                        <td class="score" colspan="2">{{ value.0 }}</td>
+                            <form method="POST" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <td width="20%" class="dropdown"><label for="wait-times">Submit Wait Time: </label> 
+                                <select name="time-ranges" id="wait-time"> 
+                                    <option value='{{ key }}_0'>Please select</option>
+                                    <option value='{{ key }}_1'>0 min - 9 min</option> 
+                                    <option value='{{ key }}_2'>10 min - 19 min</option> 
+                                    <option value='{{ key }}_3'>20 min - 29 min</option> 
+                                    <option value='{{ key }}_4'>30+ min</option> 
+                                </select>
+                                <button type="submit" name="">submit</button>
+                            </form>
+                        </td>
+                    </tr>
+                </table>
+                <br>
+            {% empty %}
+            <p id= "page-subhead">
+            This dining hall is not open today.
+            </p>
+            {% endfor %}
+        </div>
+    </div>
+</div>
