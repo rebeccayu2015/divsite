@@ -39,6 +39,8 @@ def scrape_dining():
         with open("media/files/" + files[j], 'w') as file:
             items = json.dumps(str(master[i]))
             items = items.replace('\\', '')
+            if items == "\"{}\"":
+                items = "\"{'': [0, 0, [], []]}\""
             file.write(items)
             file.close()
         j += 1

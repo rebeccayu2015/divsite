@@ -21,3 +21,6 @@ l@https://www.googletagmanager.com/gtag/js?id=G-B8JR0BWLMK&l=dataLayer&cx=c:153:
 Fz@https://www.googletagmanager.com/gtag/js?id=G-B8JR0BWLMK&l=dataLayer&cx=c:459:134
 Gz/<@https://www.googletagmanager.com/gtag/js?id=G-B8JR0BWLMK&l=dataLayer&cx=c:459:111
 
+1695552723566	Marionette	INFO	Stopped listening on port 59150
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
+console.error: "Failed to fetch https://spocs.getpocket.com/user:" "NetworkError when attempting to fetch resource."

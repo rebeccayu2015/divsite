@@ -210,7 +210,7 @@
         {% endif %}
       </nav>
         <div class="title">
-            <h1>Columbia Dining Dashboard</h1>
+            <h1>Munch Meter Dashboard</h1>
         </div>
         
     </div>
@@ -235,7 +235,21 @@
                     <td>{{ best_rated.0 }}</td>
                     <td>{{ best_rated.1 }}</td>
                     <td>{{ best_rated.2 }}</td>
-                    <td>{{ best_rated.3 }}</td>
+                    <td>
+                        {% if best_rated.3 == 0 %}
+                            N/A
+                        {% elif best_rated.3 <= 1 %}
+                            0 min - 9 min
+                        {% elif best_rated.3 <= 2 %}
+                            10 min - 19 min
+                        {% elif best_rated.3 <= 3 %}
+                            20 min - 29 min
+                        {% elif best_rated.3 <= 4 %}
+                            30+ min
+                        {% else %}
+                            N/A
+                        {% endif %}
+                    </td>
                   </tr>
             </table>
         </div>
